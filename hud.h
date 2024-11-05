@@ -11,7 +11,7 @@ class HUD {
 public:
 	HUD();
 	HUD(Graphics &g, Player &player);
-	void update(int elapsedTime);
+	void update(int elapsedTime, Player &player);
 	void draw(Graphics &graphics);
 
 private:

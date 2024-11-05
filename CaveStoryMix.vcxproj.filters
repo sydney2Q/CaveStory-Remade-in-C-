@@ -28,6 +28,12 @@
     <Filter Include="Content\maps">
       <UniqueIdentifier>{81ad651c-f924-4f92-812f-24fab6c61ecd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Enemies">
+      <UniqueIdentifier>{0f6866b6-532c-4b71-a283-e5f6698e3fe0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Enemies">
+      <UniqueIdentifier>{127276b7-37b1-4837-8c83-c38a4c3a6cdc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="graphics.h">
@@ -78,6 +84,12 @@
     <ClInclude Include="door.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="enemy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bat.h">
+      <Filter>Header Files\Enemies</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -116,6 +128,12 @@
     <ClCompile Include="hud.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="enemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bat.cpp">
+      <Filter>Source Files\Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Content\backgrounds\bkBlue.png">
@@ -128,6 +146,9 @@
       <Filter>Content\tilesets</Filter>
     </Image>
     <Image Include="Content\sprites\TextBox.png">
+      <Filter>Content\sprites</Filter>
+    </Image>
+    <Image Include="Content\sprites\NpcCemet.png">
       <Filter>Content\sprites</Filter>
     </Image>
   </ItemGroup>

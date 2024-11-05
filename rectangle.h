@@ -38,7 +38,15 @@ public:
 	}
 
 	//function takes in another rectangle and checks if they are colliding or not
-	const bool collidesWith(const Rectangle& other) {
+	const bool collidesWith(const Rectangle &other) const {
+		return
+			this->getRight() >= other.getLeft() &&
+			this->getLeft() <= other.getRight() &&
+			this->getTop() <= other.getBottom() &&
+			this->getBottom() >= other.getTop();
+	}
+
+	bool collidesWithNOTCONST( Rectangle& other) {
 		return
 			this->getRight() >= other.getLeft() &&
 			this->getLeft() <= other.getRight() &&

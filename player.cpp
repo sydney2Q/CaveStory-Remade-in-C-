@@ -207,6 +207,16 @@ void Player::handleDoorCollision(std::vector<Door> &others, Level &level, Graphi
 	}
 }
 
+void Player::handleEnemyCollisions(std::vector<Enemy*> &others) {
+	for (int i = 0; i < others.size(); i++) {
+		others.at(i)->touchPlayer(this);
+	}
+}
+
+void Player::adjustHealth(int amount) {
+	this->_currentHealth += amount;
+}
+
 void Player::update(float elapsedTime) {
 	//apply gravity
 	if (this->_dy <= player_constants::GRAVITY_CAP) {

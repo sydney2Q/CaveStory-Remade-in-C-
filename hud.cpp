@@ -23,7 +23,9 @@ HUD::HUD(Graphics& graphics, Player& player) {
 	this->_dashes = Sprite(graphics, "Content/sprites/TextBox.png", 81, 51, 15, 11, 132, 26);
 }
 
-void HUD::update(int elapsedTime) {
+void HUD::update(int elapsedTime, Player &player) {
+	this->_player = player;
+
 	//makes the first number correspond with the current health by moving the rectangle to the correct position on the spritesheet
 	this->_healthNumber1.setSourceRectX(8 * this->_player.getCurrentHealth());
 

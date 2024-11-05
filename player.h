@@ -6,6 +6,7 @@
 #include "slope.h"
 #include "level.h"
 #include "door.h"
+#include "enemy.h"
 
 class Graphics;
 
@@ -62,11 +63,17 @@ public:
 	//if those are true we can use the door to go to another level
 	void handleDoorCollision(std::vector<Door> &others, Level &level, Graphics &graphics);
 
+	//checks if we are colliding with an enemy's box or not
+	void handleEnemyCollisions(std::vector<Enemy*> &others);
+
 	const float getX() const;
 	const float getY() const;
 
 	const inline int getMaxHealth() const { return this->_maxHealth; }
 	const inline int getCurrentHealth() const { return this->_currentHealth; }
+
+	//changes our current health by the amount passed in
+	void adjustHealth(int amount);
 
 private:
 	float _dx, _dy;

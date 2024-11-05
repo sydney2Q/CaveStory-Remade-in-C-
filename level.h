@@ -9,6 +9,10 @@
 #include "animatedtile.h"
 #include "door.h"
 
+//ENEMY FILES HERE!!!
+class Bat;
+
+
 #include <vector>
 
 struct SDL_Texture;
@@ -16,6 +20,10 @@ struct SDL_Rect;
 struct Tileset;
 
 class Graphics;
+class Enemy;
+class Player;
+
+
 
 
 class Level {
@@ -23,7 +31,7 @@ public:
 	Level();
 	Level(std::string mapName, Graphics &graphics);
 	~Level();
-	void update(int elapsedTime);
+	void update(int elapsedTime, Player &player);
 	//this thing actually loops to draw the image multiple times to cover the screen
 	void draw(Graphics &graphics);
 
@@ -36,6 +44,9 @@ public:
 
 	//check for door collisions 
 	std::vector<Door> checkDoorCollisions(const Rectangle &other);
+
+	//check for enemy collision
+	std::vector<Enemy*> checkEnemyCollisions(const Rectangle &other);
 
 	const Vector2 getPlayerSpawnPoint() const;
 
@@ -56,6 +67,9 @@ private:
 	std::vector<AnimatedTileInfo> _animatedTileInfos;
 
 	std::vector<Door> _doorList;
+
+	//vector of POINTERS to enemies. this lets us store multiple derived specific enemies from the enemy class in one list
+	std::vector<Enemy*> _enemies;
 
 	//void loadMap
 	//is private because we only ever call it inside the class

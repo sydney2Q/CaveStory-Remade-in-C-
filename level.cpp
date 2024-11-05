@@ -5,6 +5,9 @@
 #include <SDL.h>
 #include "tinyxml2.h"
 #include "utils.h"
+#include "player.h"
+#include "enemy.h"
+#include "bat.h"
 
 #include <sstream>
 #include <algorithm>
@@ -351,6 +354,28 @@ void Level::loadMap(std::string mapName, Graphics& graphics) {
 					}
 				}
 			}
+
+
+			else if (ss.str() == "enemies") {
+				float x, y;
+				XMLElement* pObject = pObjectGroup->FirstChildElement("object");
+				if (pObject != NULL) {
+					while (pObject) {
+						x = pObject->FloatAttribute("x");
+						y = pObject->FloatAttribute("y");
+						std::stringstream ss;
+						const char* name = pObject->Attribute("name");
+						ss << name;
+						//if we have more enemies, check them here and add them into our list of enemies as pointers
+						if (ss.str() == "bat") {
+							printf("hi");
+							this->_enemies.push_back(new Bat(graphics, Vector2(std::floor(x)* globals::SPRITE_SCALE,
+								std::floor(y)* globals::SPRITE_SCALE)));
+						}
+						pObject = pObject->NextSiblingElement("object");
+					}
+				}
+			}
 			//other objectgroups go here with an else if (ss.str() == "whatever")
 			pObjectGroup = pObjectGroup->NextSiblingElement("objectgroup");
 		}
@@ -358,10 +383,14 @@ void Level::loadMap(std::string mapName, Graphics& graphics) {
 
 }
 
-void Level::update(int elapsedTime) {
+void Level::update(int elapsedTime, Player &player) {
 	//play our animated tiles
 	for (int i = 0; i < this->_animatedTileList.size(); i++) {
 		this->_animatedTileList.at(i).update(elapsedTime);
+	}
+
+	for (int i = 0; i < this->_enemies.size(); i++) {
+		this->_enemies.at(i)->update(elapsedTime, player);
 	}
 }
 
@@ -375,6 +404,11 @@ void Level::draw(Graphics& graphics) {
 	//draw animated tiles
 	for (int i = 0; i < this->_animatedTileList.size(); i++) {
 		this->_animatedTileList.at(i).draw(graphics);
+	}
+
+	//draw enemies
+	for (int i = 0; i < this->_enemies.size(); i++) {
+		this->_enemies.at(i)->draw(graphics);
 	}
 
 
@@ -424,6 +458,16 @@ std::vector<Door> Level::checkDoorCollisions(const Rectangle &other) {
 	for (int i = 0; i < this->_doorList.size(); i++) {
 		if (this->_doorList.at(i).collidesWith(other)) {
 			others.push_back(this->_doorList.at(i));
+		}
+	}
+	return others;
+}
+
+std::vector<Enemy*> Level::checkEnemyCollisions(const Rectangle &other) {
+	std::vector<Enemy*> others;
+	for (int i = 0; i < this->_enemies.size(); i++) {
+		if ((this->_enemies.at(i)->getBoundingBox()).collidesWith(other)) {
+			others.push_back(this->_enemies.at(i));
 		}
 	}
 	return others;

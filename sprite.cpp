@@ -39,6 +39,7 @@ const Rectangle Sprite::getBoundingBox() const{
 	return this->_boundingBox;
 }
 
+
 const sides::Side Sprite::getCollisionSide(Rectangle &other) const {
 	//we can get the side we are colliding with by finding the SMALLEST dimensional overlap between the two rectangles
 	//the amount that each rectangle is overlapping with the other

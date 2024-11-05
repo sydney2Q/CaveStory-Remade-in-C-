@@ -129,8 +129,8 @@ void Game::draw(Graphics &graphics) {
 
 void Game::update(float elapsedTime) {
 	this->_player.update(elapsedTime);
-	this->_level.update(elapsedTime);
-	this->_hud.update(elapsedTime);
+	this->_level.update(elapsedTime, this->_player);
+	this->_hud.update(elapsedTime, this->_player);
 
 	//check {
 	//collision
@@ -148,6 +148,12 @@ void Game::update(float elapsedTime) {
 	std::vector<Door> otherDoors;
 	if ((otherDoors = this->_level.checkDoorCollisions(this->_player.getBoundingBox())).size() > 0) {
 		this->_player.handleDoorCollision(otherDoors, this->_level, this->_graphics);
+	}
+
+	//check enemy collision
+	std::vector<Enemy*> otherEnemies;
+	if ((otherEnemies = this->_level.checkEnemyCollisions(this->_player.getBoundingBox())).size() > 0) {
+		this->_player.handleEnemyCollisions(otherEnemies);
 	}
 
 }

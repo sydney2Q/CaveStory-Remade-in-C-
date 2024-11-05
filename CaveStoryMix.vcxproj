@@ -143,7 +143,9 @@
   <ItemGroup>
     <ClInclude Include="animatedsprite.h" />
     <ClInclude Include="animatedtile.h" />
+    <ClInclude Include="bat.h" />
     <ClInclude Include="door.h" />
+    <ClInclude Include="enemy.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="graphics.h" />
@@ -161,6 +163,8 @@
   <ItemGroup>
     <ClCompile Include="animatedsprite.cpp" />
     <ClCompile Include="animatedtile.cpp" />
+    <ClCompile Include="bat.cpp" />
+    <ClCompile Include="enemy.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="graphics.cpp" />
     <ClCompile Include="hud.cpp" />
@@ -175,6 +179,7 @@
   <ItemGroup>
     <Image Include="Content\backgrounds\bkBlue.png" />
     <Image Include="Content\sprites\MyChar.png" />
+    <Image Include="Content\sprites\NpcCemet.png" />
     <Image Include="Content\sprites\TextBox.png" />
     <Image Include="Content\tilesets\PrtCave.png" />
   </ItemGroup>
